@@ -56,6 +56,7 @@ class UnderstandURL():
                 self.domain += v
             i += 1
         self.branchURL = ()
+        last = False
         while ok:
             v = self.pattern.group(2 + i)
             if v == None:
@@ -65,8 +66,10 @@ class UnderstandURL():
                 i += 1
                 break
             else:
-                if v[:
-                self.url
+                if v[-2:] != "/":
+                    v = v[:-2]
+                self.branchURL[self.branchURL.length] = v
+        self.extension = self.pattern.group(2 + i)
 
 def threadMethod(url, saveList, hasParsedList):
     if url[:1] == "//":
