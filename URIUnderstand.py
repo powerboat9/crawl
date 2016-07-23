@@ -1,3 +1,19 @@
+import download from basicDownload
+
+class ParseRobots():
+    def __init__(self, domain, userAgent):
+        if userAgent == None || !isinstance(userAgent, str):
+            raise Exception("Invalid User Agent")
+        rURL = domain + "/robots.txt"
+        retDownload = download(rURL)
+        if retDownload[0]:
+            self.data = retDownload[1]
+        else:
+            self.data = ""
+        self.userAgent = userAgent
+        
+        
+
 class UnderstandURL():
     def __init__(self, url)
         if url[:1] == "//":
@@ -18,6 +34,8 @@ class UnderstandURL():
             else:
                 self.domain += v
             i += 1
+        if i < 2:
+            self.isDomainOk = False
         self.branchURL = ()
         last = False
         while ok:
@@ -33,7 +51,13 @@ class UnderstandURL():
                     v = v[:-2]
                 self.branchURL[self.branchURL.length] = v
         self.extension = self.pattern.group(2 + i)
-    def isOK(self):
-        return (self.URI == "https") || (self.URI == "http")
-    def getDomain(self):
+    @property
+    def okDomain(self):
+        return self.URI && self.isDomainOk
+    @property
+    def okURI(self):
+        return self.isOk && ((self.URI == "https") || (self.URI == "http"))
+    @property
+    def catDomain(self):
         return self.URI + "://" + self.domain
+    def robots(self)

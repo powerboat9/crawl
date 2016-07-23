@@ -2,13 +2,8 @@ import HTMLParser from HTMLParser
 import Thread from threading
 import re
 import request from urllib
-
-def download(url):
-    data = None
-    req = request.Request(url)
-    with request.urlopen(req) as freq: #File REQuest
-        data = freq.read()
-    return data
+import URIUnderstand
+import basicDownload
 
 class Parse(HTMLParser):
     def __init__(self, url, saveList = (), unsafeList = (), hasParsedList = {}):
@@ -49,4 +44,4 @@ class Parse(HTMLParser):
 def threadMethod(url, saveList, hasParsedList):
     v = UnderstandURL(url)
     if v.isOK():
-        
+        v.robotsTxt
