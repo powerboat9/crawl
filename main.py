@@ -39,7 +39,7 @@ class Parse(HTMLParser):
 
 class UnderstandURL():
     def __init__(self, url)
-        self.pattern = re.match("([^:]+)://[^.].?")
+        self.pattern = re.match("([^:]+)://([^.][.]?)")
 
 def threadMethod(url, saveList, hasParsedList):
     if url[:1] == "//":
@@ -48,4 +48,3 @@ def threadMethod(url, saveList, hasParsedList):
         url = 
     if url[:7] != "https://" && url[:6] != "http://":
         raise Exception("Could not search invalid URI scheme")
-    Save
