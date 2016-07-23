@@ -1,19 +1,5 @@
 import download from basicDownload
 
-class ParseRobots():
-    def __init__(self, domain, userAgent):
-        if userAgent == None || !isinstance(userAgent, str):
-            raise Exception("Invalid User Agent")
-        rURL = domain + "/robots.txt"
-        retDownload = download(rURL)
-        if retDownload[0]:
-            self.data = retDownload[1]
-        else:
-            self.data = ""
-        self.userAgent = userAgent
-        
-        
-
 class UnderstandURL():
     def __init__(self, url)
         if url[:1] == "//":
@@ -60,4 +46,3 @@ class UnderstandURL():
     @property
     def catDomain(self):
         return self.URI + "://" + self.domain
-    def robots(self)
