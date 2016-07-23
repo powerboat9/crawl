@@ -39,7 +39,9 @@ class Parse(HTMLParser):
 
 class UnderstandURL():
     def __init__(self, url)
-        self.pattern = re.match("([^:]+)://([^.][.]?)")
+        self.pattern = re.match("([^:]+)://([^./][.]?){,}(/)?([^/]+/?){,}")
+        self.URI = self.pattern.group(1)
+        self.domain = 
 
 def threadMethod(url, saveList, hasParsedList):
     if url[:1] == "//":
