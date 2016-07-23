@@ -1,6 +1,14 @@
 import HTMLParser from HTMLParser
 import Thread from threading
 import re
+import request from urllib
+
+def download(url):
+    data = None
+    req = request.Request(url)
+    with request.urlopen(req) as freq: #File REQuest
+        data = freq.read()
+    return data
 
 class Parse(HTMLParser):
     def __init__(self, url, saveList = (), unsafeList = (), hasParsedList = {}):
@@ -10,6 +18,7 @@ class Parse(HTMLParser):
         self.baseURL = url
         self.url = url
         super(Parse, self).__init__()
+        self.getData = download(url)
     def unsafe(self, url):
         if !self.hasParsedList[url]:
             self.unsafeList[self.unsafeList.length] = url
@@ -39,6 +48,8 @@ class Parse(HTMLParser):
 
 class UnderstandURL():
     def __init__(self, url)
+        if url[:1] == "//":
+            url = "https:" + url
         self.pattern = re.match("([^:]+)://([^./][.]?){,}(/)?([^/]+/){,}([^.]*)([.])(.*)")
         self.URI = self.pattern.group(1)
         self.domain = ""
@@ -70,11 +81,10 @@ class UnderstandURL():
                     v = v[:-2]
                 self.branchURL[self.branchURL.length] = v
         self.extension = self.pattern.group(2 + i)
+    def isOK(self):
+        return (self.URI == "https") || (self.URI == "http")
 
 def threadMethod(url, saveList, hasParsedList):
-    if url[:1] == "//":
-        url = "https://"
-    elif url[0] == "/":
-        url = 
-    if url[:7] != "https://" && url[:6] != "http://":
-        raise Exception("Could not search invalid URI scheme")
+    v = UnderstandURL(url)
+    if v.isOK():
+        
